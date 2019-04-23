@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory>
+        <ListPreference
+            android:key="room_id"
+            android:title="@string/roomid"
+            android:defaultValue="@string/default_roomid_value"
+            android:entries="@array/room_ids"
+            android:entryValues="@array/room_entry"
+            android:summary="%s"
+            />
+        <ListPreference
+            android:key="list_actuators"
+            android:title="@string/actuators_settings"
+            android:defaultValue="@string/default_roomid_value"
+            android:summary="%s"
+            />
+
+
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>
