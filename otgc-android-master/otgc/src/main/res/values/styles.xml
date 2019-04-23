@@ -29,7 +29,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!-- custom font for the entire app -->
-        <item name="android:fontFamily">@font/century_gothic</item>
+            <item name="android:fontFamily">@font/century_gothic</item>
         <!--<item name="fontFamily">@font/century_gothic</item> --> <!-- target android sdk versions < 26 and > 14 if theme other than AppCompat -->
         <!--<item name="android:textColorSecondary">@color/white1</item>-->
         <item name="android:alertDialogTheme">@style/AppTheme.Dialog</item>
