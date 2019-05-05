@@ -1,0 +1,4 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('iotivity-base-armeabi-v7a-release.aar'))
+dependencies {
+}

@@ -1,1 +1,1 @@
-include ':otgc', ':iotivity-base-release', ':easy-setup-core', ':remote'
+include ':otgc', ':iotivity-base-release', ':easy-setup-core', ':remote', ':iotivity-base-armeabi-v7a-release'

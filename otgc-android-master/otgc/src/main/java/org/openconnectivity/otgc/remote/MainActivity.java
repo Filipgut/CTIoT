@@ -1,7 +1,6 @@
 package org.openconnectivity.otgc.remote;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -21,17 +20,25 @@ import android.widget.TextView;
 
 import org.openconnectivity.otgc.R;
 import org.openconnectivity.otgc.devicelist.presentation.view.DeviceListActivity;
-import org.openconnectivity.otgc.splash.presentation.view.SplashActivity;
+import org.openconnectivity.otgc.devicelist.presentation.viewmodel.DeviceListViewModel;
+import org.openconnectivity.otgc.remote.viewmodel.MainViewModel;
 
 import java.text.DateFormat;
 import java.util.Date;
 
-import androidx.annotation.RequiresApi;
+import javax.inject.Inject;
 
-public class MainActivity extends Activity implements SensorEventListener {
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import dagger.android.AndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
+public class MainActivity extends AppCompatActivity implements SensorEventListener, HasSupportFragmentInjector {
 
     private final static String NOT_SUPPORTED_MESSAGE = "Sorry, sensor not available for this device.";
-
     private SensorManager mSensorManager;
     private Sensor pressure;
     private TextView pressureView;
@@ -40,6 +47,12 @@ public class MainActivity extends Activity implements SensorEventListener {
     private TextView setTemperature;
     private Float setTempRoom = new Float(20.0);
     private int bright = 10;
+    @Inject
+    ViewModelProvider.Factory mViewModelFactory;
+
+    private DeviceListViewModel mViewModel;
+
+    private MainViewModel mainModelView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +74,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 
         final ImageButton more = (ImageButton) findViewById(R.id.more);
 
+        mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(DeviceListViewModel.class);
 
+        mainModelView = (MainViewModel) ViewModelProviders.of(this, mViewModelFactory).get(MainViewModel.class);
         temperature = (TextView) findViewById(R.id.temperature);
         setTemperature = (TextView) findViewById(R.id.set_temperature);
         setTemperature.setText("Set to: " + setTempRoom.toString());
@@ -117,7 +132,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 
                 }
 
+
             }
+
 
         });
 
@@ -231,4 +248,8 @@ public class MainActivity extends Activity implements SensorEventListener {
     }
 
 
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return null;
+    }
 }
